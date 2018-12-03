@@ -40,6 +40,18 @@ var getRandomColor = function () {
   return hslRandom;
 };
 
+// функция для отрисовки столбика гистограммы заданного цвета
+var getColumnColor = function (hue, saturation, lightness) {
+  var columnColor = 'hsl(' + hue + ', ' + saturation + '%, ' + lightness + '%)';
+  return columnColor;
+};
+
+// функция для отрисовки столбика гистограммы случайным цветом
+var getColumnRandomColor = function () {
+  var columnRandomColor = getRandomColor();
+  return columnRandomColor;
+};
+
 window.renderStatistics = function (ctx, players, times) {
   renderCloud(ctx, CLOUD_X + GAP, CLOUD_Y + GAP, 'rgba(0, 0, 0, 0.7)');
   renderCloud(ctx, CLOUD_X, CLOUD_Y, '#fff');
@@ -59,8 +71,7 @@ window.renderStatistics = function (ctx, players, times) {
     if (players[i] === 'Вы') {
       ctx.fillStyle = 'rgba(255, 0, 0, 1)';
     } else {
-      var saturationIndex = getRandomInteger(0, 100);
-      ctx.fillStyle = 'hsl(240,' + saturationIndex + '%, 50%)';
+      ctx.fillStyle = getColumnColor(240, getRandomInteger(0, 100), 50); // синий цвет с разной насыщенностью
     }
 
     ctx.fillRect(CLOUD_X + GAP * 3 + (COLUMN_WIDTH + COLUMN_GAP) * i, CLOUD_HEIGHT - FONT_GAP - GAP, COLUMN_WIDTH, -(BAR_HEIGHT * times[i]) / maxTime);
