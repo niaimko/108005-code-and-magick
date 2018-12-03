@@ -34,11 +34,13 @@ var getRandomInteger = function (min, max) {
   return randomInteger;
 };
 
-// функция для получения случайного цвета в hsl
+// функция для получения случайного цвета в hsl, скрыл её времено так как travis ругается, что я ее нигде не использую
+/*
 var getRandomColor = function () {
   var hslRandom = 'hsl(' + getRandomInteger(0, 360) + ', ' + getRandomInteger(0, 100) + '%, ' + getRandomInteger(0, 100) + '%)';
   return hslRandom;
 };
+*/
 
 // функция для отрисовки столбика гистограммы заданного цвета
 var getColumnColor = function (hue, saturation, lightness) {
