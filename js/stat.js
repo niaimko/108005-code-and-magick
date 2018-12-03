@@ -11,30 +11,31 @@ var BAR_HEIGHT = 150;
 var columnHeight = -(BAR_HEIGHT - FONT_GAP - GAP - GAP - FONT_GAP); // высота шкалы в гистограмме
 var COLUMN_GAP = 50;
 
-var renderCloud = function(ctx, x, y, color) {
+var renderCloud = function (ctx, x, y, color) {
   ctx.fillStyle = color;
   ctx.fillRect(x, y, CLOUD_WIDTH, CLOUD_HEIGHT);
 };
 
-var getMaxElement = function(arr) {
+var getMaxElement = function (arr) {
   var maxElement = arr[0];
-  return maxElement;
 
   for (var i = 1; i < arr.length; i++) {
     if (arr[i] > maxElement) {
       maxElement = arr[i];
     }
   }
+
+  return maxElement;
 };
 
 // функция для получения случайного целого числа в заданном диапазоне
-var getRandomInteger = function(min, max) {
+var getRandomInteger = function (min, max) {
   var randomInteger = min - 0.5 + Math.random() * (max - min + 1);
   randomInteger = Math.round(randomInteger);
   return randomInteger;
 };
 
-window.renderStatistics = function(ctx, players, times) {
+window.renderStatistics = function (ctx, players, times) {
   renderCloud(ctx, CLOUD_X + GAP, CLOUD_Y + GAP, 'rgba(0, 0, 0, 0.7)');
   renderCloud(ctx, CLOUD_X, CLOUD_Y, '#fff');
 
