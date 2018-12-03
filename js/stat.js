@@ -46,11 +46,13 @@ var getColumnColor = function (hue, saturation, lightness) {
   return columnColor;
 };
 
-// функция для отрисовки столбика гистограммы случайным цветом
+// функция для отрисовки столбика гистограммы случайным цветом, скрыл её времено так как travis ругается, что я ее нигде не использую
+/*
 var getColumnRandomColor = function () {
   var columnRandomColor = getRandomColor();
   return columnRandomColor;
 };
+*/
 
 window.renderStatistics = function (ctx, players, times) {
   renderCloud(ctx, CLOUD_X + GAP, CLOUD_Y + GAP, 'rgba(0, 0, 0, 0.7)');
