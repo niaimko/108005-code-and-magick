@@ -34,6 +34,12 @@ var getRandomInteger = function (min, max) {
   return randomInteger;
 };
 
+// функция для получения случайного цвета в hsl
+var getRandomColor = function () {
+  var hslRandom = 'hsl(' + getRandomInteger(0, 360) + ', ' + getRandomInteger(0, 100) + '%, ' + getRandomInteger(0, 100) + '%)';
+  return hslRandom;
+};
+
 window.renderStatistics = function (ctx, players, times) {
   renderCloud(ctx, CLOUD_X + GAP, CLOUD_Y + GAP, 'rgba(0, 0, 0, 0.7)');
   renderCloud(ctx, CLOUD_X, CLOUD_Y, '#fff');
