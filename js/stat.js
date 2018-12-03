@@ -8,7 +8,6 @@ var GAP = 10;
 var FONT_GAP = 16;
 var COLUMN_WIDTH = 40;
 var BAR_HEIGHT = 150;
-var columnHeight = -(BAR_HEIGHT - FONT_GAP - GAP - GAP - FONT_GAP); // высота шкалы в гистограмме
 var COLUMN_GAP = 50;
 
 var renderCloud = function (ctx, x, y, color) {
@@ -43,8 +42,8 @@ window.renderStatistics = function (ctx, players, times) {
   ctx.font = '16px PT Mono';
   ctx.textBaseline = 'hanging';
 
-  ctx.fillText('Ура вы победили!', CLOUD_X + GAP, CLOUD_Y + GAP + FONT_GAP);
-  ctx.fillText('Список результатов:', CLOUD_X + GAP, CLOUD_Y + GAP + FONT_GAP + GAP + GAP);
+  ctx.fillText('Ура вы победили!', CLOUD_X + GAP * 2, CLOUD_Y + FONT_GAP);
+  ctx.fillText('Список результатов:', CLOUD_X + GAP * 2, CLOUD_Y + GAP + FONT_GAP + GAP);
 
   ctx.textBaseline = 'alphabetic';
 
@@ -58,9 +57,9 @@ window.renderStatistics = function (ctx, players, times) {
       ctx.fillStyle = 'hsl(240,' + saturationIndex + '%, 50%)';
     }
 
-    ctx.fillRect(CLOUD_X + GAP * 3 + (COLUMN_WIDTH + COLUMN_GAP) * i, CLOUD_HEIGHT - GAP - FONT_GAP - GAP, COLUMN_WIDTH, (columnHeight * times[i]) / maxTime);
+    ctx.fillRect(CLOUD_X + GAP * 3 + (COLUMN_WIDTH + COLUMN_GAP) * i, CLOUD_HEIGHT - FONT_GAP - GAP, COLUMN_WIDTH, -(BAR_HEIGHT * times[i]) / maxTime);
     ctx.fillStyle = '#000';
-    ctx.fillText(Math.round(times[i]), CLOUD_X + GAP * 3 + (COLUMN_WIDTH + COLUMN_GAP) * i, CLOUD_HEIGHT - GAP - FONT_GAP - GAP - GAP + (columnHeight * times[i]) / maxTime);
-    ctx.fillText(players[i], CLOUD_X + GAP * 3 + (COLUMN_WIDTH + COLUMN_GAP) * i, CLOUD_HEIGHT - GAP);
+    ctx.fillText(Math.round(times[i]), CLOUD_X + GAP * 3 + (COLUMN_WIDTH + COLUMN_GAP) * i, CLOUD_HEIGHT - GAP - FONT_GAP - GAP + (-(BAR_HEIGHT * times[i]) / maxTime));
+    ctx.fillText(players[i], CLOUD_X + GAP * 3 + (COLUMN_WIDTH + COLUMN_GAP) * i, CLOUD_HEIGHT);
   }
 };
