@@ -34,27 +34,17 @@ var getRandomInteger = function (min, max) {
   return randomInteger;
 };
 
-// функция для получения случайного цвета в hsl, скрыл её времено так как travis ругается, что я ее нигде не использую
-/*
-var getRandomColor = function () {
-  var hslRandom = 'hsl(' + getRandomInteger(0, 360) + ', ' + getRandomInteger(0, 100) + '%, ' + getRandomInteger(0, 100) + '%)';
-  return hslRandom;
+// функция для получения заданного цвета
+var getColor = function (hue, saturation, lightness) {
+  var сolor = 'hsl(' + hue + ', ' + saturation + '%, ' + lightness + '%)';
+  return сolor;
 };
-*/
 
-// функция для отрисовки столбика гистограммы заданного цвета
-var getColumnColor = function (hue, saturation, lightness) {
-  var columnColor = 'hsl(' + hue + ', ' + saturation + '%, ' + lightness + '%)';
+// функция для отрисовки столбика гистограммы заданным цветом
+var getColumnColor = function () {
+  var columnColor = getColor(240, getRandomInteger(0, 100), 50); // получение синего цвета с разной нысыщенностью
   return columnColor;
-};
-
-// функция для отрисовки столбика гистограммы случайным цветом, скрыл её времено так как travis ругается, что я ее нигде не использую
-/*
-var getColumnRandomColor = function () {
-  var columnRandomColor = getRandomColor();
-  return columnRandomColor;
-};
-*/
+}
 
 window.renderStatistics = function (ctx, players, times) {
   renderCloud(ctx, CLOUD_X + GAP, CLOUD_Y + GAP, 'rgba(0, 0, 0, 0.7)');
@@ -75,7 +65,7 @@ window.renderStatistics = function (ctx, players, times) {
     if (players[i] === 'Вы') {
       ctx.fillStyle = 'rgba(255, 0, 0, 1)';
     } else {
-      ctx.fillStyle = getColumnColor(240, getRandomInteger(0, 100), 50); // синий цвет с разной насыщенностью
+      ctx.fillStyle = getColumnColor();
     }
 
     ctx.fillRect(CLOUD_X + GAP * 3 + (COLUMN_WIDTH + COLUMN_GAP) * i, CLOUD_HEIGHT - FONT_GAP - GAP, COLUMN_WIDTH, -(BAR_HEIGHT * times[i]) / maxTime);
