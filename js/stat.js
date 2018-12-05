@@ -44,7 +44,7 @@ var getColor = function (hue, saturation, lightness) {
 var getColumnColor = function () {
   var columnColor = getColor(240, getRandomInteger(0, 100), 50); // получение синего цвета с разной нысыщенностью
   return columnColor;
-}
+};
 
 window.renderStatistics = function (ctx, players, times) {
   renderCloud(ctx, CLOUD_X + GAP, CLOUD_Y + GAP, 'rgba(0, 0, 0, 0.7)');
