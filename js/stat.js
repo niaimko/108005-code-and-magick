@@ -35,7 +35,7 @@ var getRandomInteger = function (min, max) {
 };
 
 // функция для получения заданного цвета
-var getColor = function (hue, saturation, lightness) {
+var getColor = function () {
   return 'hsl(240, ' + getRandomInteger(0, 100) + '%, 50%)';
 };
 
