@@ -36,14 +36,14 @@ var getRandomInteger = function (min, max) {
 
 // функция для получения заданного цвета
 var getColor = function (hue, saturation, lightness) {
-  var сolor = 'hsl(' + hue + ', ' + saturation + '%, ' + lightness + '%)';
-  return сolor;
+  return 'hsl(240, ' + getRandomInteger(0, 100) + '%, 50%)';
 };
 
-// функция для отрисовки столбика гистограммы заданным цветом
-var getColumnColor = function () {
-  var columnColor = getColor(240, getRandomInteger(0, 100), 50); // получение синего цвета с разной нысыщенностью
-  return columnColor;
+var drawColumn = function (ctx, i, playersTime, player, maxTime) {
+  ctx.fillRect(CLOUD_X + GAP * 3 + (COLUMN_WIDTH + COLUMN_GAP) * i, CLOUD_HEIGHT - FONT_GAP - GAP, COLUMN_WIDTH, -(BAR_HEIGHT * playersTime) / maxTime);
+  ctx.fillStyle = '#000';
+  ctx.fillText(Math.round(playersTime), CLOUD_X + GAP * 3 + (COLUMN_WIDTH + COLUMN_GAP) * i, CLOUD_HEIGHT - GAP - FONT_GAP - GAP + (-(BAR_HEIGHT * playersTime) / maxTime));
+  ctx.fillText(player, CLOUD_X + GAP * 3 + (COLUMN_WIDTH + COLUMN_GAP) * i, CLOUD_HEIGHT);
 };
 
 window.renderStatistics = function (ctx, players, times) {
@@ -65,12 +65,8 @@ window.renderStatistics = function (ctx, players, times) {
     if (players[i] === 'Вы') {
       ctx.fillStyle = 'rgba(255, 0, 0, 1)';
     } else {
-      ctx.fillStyle = getColumnColor();
+      ctx.fillStyle = getColor();
     }
-
-    ctx.fillRect(CLOUD_X + GAP * 3 + (COLUMN_WIDTH + COLUMN_GAP) * i, CLOUD_HEIGHT - FONT_GAP - GAP, COLUMN_WIDTH, -(BAR_HEIGHT * times[i]) / maxTime);
-    ctx.fillStyle = '#000';
-    ctx.fillText(Math.round(times[i]), CLOUD_X + GAP * 3 + (COLUMN_WIDTH + COLUMN_GAP) * i, CLOUD_HEIGHT - GAP - FONT_GAP - GAP + (-(BAR_HEIGHT * times[i]) / maxTime));
-    ctx.fillText(players[i], CLOUD_X + GAP * 3 + (COLUMN_WIDTH + COLUMN_GAP) * i, CLOUD_HEIGHT);
+    drawColumn(ctx, i, times[i], players[i], maxTime);
   }
 };
