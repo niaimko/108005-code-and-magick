@@ -4,6 +4,12 @@
 var userDialog = document.querySelector('.setup');
 userDialog.classList.remove('hidden');
 
+// находим элемент в который мы будем вставлять похожих персонажей
+var similarListElement = userDialog.querySelector('.setup-similar-list');
+
+// находим шаблон, который мы будем копировать
+var similarWizardTemplate = document.querySelector('#similar-wizard-template').content.querySelector('.setup-similar-item');
+
 // массив имён персонажей
 var wizardName = ['Иван', 'Хуан Себастьян', 'Мария', 'Кристоф', 'Виктор', 'Юлия', 'Люпита', 'Вашингтон'];
 // массив фамилий персонажей
@@ -47,24 +53,26 @@ var wizards = [
   }
 ];
 
-// найдем и покажем блок с похожими персонажами
-document.querySelector('.setup-similar').classList.remove('hidden');
-
-// находим элемент в который мы будем вставлять похожих магов
-var similarListElement = document.querySelector('.setup-similar-list');
-// находим шаблон, который мы будем копировать
-var similarWizardTemplate = document.querySelector('#similar-wizard-template').content.querySelector('.setup-similar-item');
-
-// отрисуем шаблон в документ
-for (var i = 0; i < wizards.length; i++) {
+// функция создания DOM-элемента на основе JS-объекта
+var renderWizard = function (wizard) {
   // копируем элемент
   var wizardElement = similarWizardTemplate.cloneNode(true);
 
   // вставляем данные
-  wizardElement.querySelector('.setup-similar-label').textContent = wizards[i].name;
-  wizardElement.querySelector('.wizard-coat').style.fill = wizards[i].coatColor;
-  wizardElement.querySelector('.wizard-eyes').style.fill = wizards[i].eyesColor;
+  wizardElement.querySelector('.setup-similar-label').textContent = wizard.name;
+  wizardElement.querySelector('.wizard-coat').style.fill = wizard.coatColor;
+  wizardElement.querySelector('.wizard-eyes').style.fill = wizard.eyesColor;
 
+  return wizardElement;
+};
+
+var fragment = document.createDocumentFragment();
+for (var i = 0; i < wizards.length; i++) {
   // добавляем элемент в конец указанного
-  similarListElement.appendChild(wizardElement);
+  fragment.appendChild(renderWizard(wizards[i]));
 }
+// добавляем элемент в конец указанного
+similarListElement.appendChild(fragment);
+
+// найдем и покажем блок с похожими персонажами
+userDialog.querySelector('.setup-similar').classList.remove('hidden');
