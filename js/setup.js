@@ -46,3 +46,25 @@ var wizards = [
     eyesColor: getRandomElement(eyesColor)
   }
 ];
+
+// найдем и покажем блок с похожими персонажами
+document.querySelector('.setup-similar').classList.remove('hidden');
+
+// находим элемент в который мы будем вставлять похожих магов
+var similarListElement = document.querySelector('.setup-similar-list');
+// находим шаблон, который мы будем копировать
+var similarWizardTemplate = document.querySelector('#similar-wizard-template').content.querySelector('.setup-similar-item');
+
+// отрисуем шаблон в документ
+for (var i = 0; i < wizards.length; i++) {
+  // копируем элемент
+  var wizardElement = similarWizardTemplate.cloneNode(true);
+
+  // вставляем данные
+  wizardElement.querySelector('.setup-similar-label').textContent = wizards[i].name;
+  wizardElement.querySelector('.wizard-coat').style.fill = wizards[i].coatColor;
+  wizardElement.querySelector('.wizard-eyes').style.fill = wizards[i].eyesColor;
+
+  // добавляем элемент в конец указанного
+  similarListElement.appendChild(wizardElement);
+}
