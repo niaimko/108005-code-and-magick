@@ -37,7 +37,7 @@ var getRandomName = function (myArray1, myArray2) {
 var createArray = function (arraySize) {
   var arr = new Array(arraySize);
   for (var i = 0; i < arraySize; i++) {
-    arr[i] = new Object();
+    arr[i] = {};
     arr[i].name = getRandomName(wizardName, wizardSurname);
     arr[i].coatColor = getRandomElement(wizardCoatColor);
     arr[i].eyesColor = getRandomElement(eyesColor);
@@ -70,7 +70,7 @@ var fillBlock = function (arrayName) {
   }
   // добавляем элемент в конец указанного
   similarListElement.appendChild(fragment);
-}
+};
 
 // заполняем блок
 fillBlock(wizards);
