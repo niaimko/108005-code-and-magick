@@ -62,11 +62,11 @@ var renderWizard = function (wizard) {
 
 // функция заполнения блока DOM-элементами на основе массива JS-объектов
 
-var fillBlock = function (wizards) {
+var fillBlock = function (arrayWizards) {
   var fragment = document.createDocumentFragment();
-  for (var i = 0; i < wizards.length; i++) {
+  for (var i = 0; i < arrayWizards.length; i++) {
     // добавляем элемент в конец указанного
-    fragment.appendChild(renderWizard(wizards[i]));
+    fragment.appendChild(renderWizard(arrayWizards[i]));
   }
   // добавляем элемент в конец указанного
   similarListElement.appendChild(fragment);
